@@ -4,18 +4,6 @@
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
 </head>
-<body>
-
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
-    </div>
-
-
   <style>
     html {
       background: url(https://wallpaperstream.com/wallpapers/full/summer/Pink-Clouds-Sky-Summer-Wallpaper.jpg);
@@ -42,11 +30,7 @@
       margin: 50px auto;
       position: relative;
       padding: 2rem;
-      box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
-        inset 0 0 10px red,
-        0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 10px #C759E3;
     }
 
     .clock-face {
@@ -55,22 +39,73 @@
       height: 100%;
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
+    
+    @keyframes rotate {
+	100% {
+		transform: rotateZ(360deg);
+  		 }
+	}
 
     .hand {
       width: 50%;
-      height: 6px;
-      background: black;
+      height: 4px;
       position: absolute;
       top: 50%;
-      transform-origin : 100%; /* Set a rotated element's base placement (https://www.tabmode.com/homepage/transform-origin.html)*/
-      transform: rotate(90deg);
-      -webkit-transition: all 0.5s linear;
+      left: 50%;
+      transform-origin : 0%; /* Set a rotated element's base placement (https://www.tabmode.com/homepage/transform-origin.html)*/
     }
+    
+    #sLine {
+   animation: rotate 60s infinite linear;
+	}
 
+	#mLine {
+   animation: rotate 3600s infinite linear;
+	}
+
+	#hLine {
+   animation: rotate 43200s infinite linear;
+	}
+
+	#smile{
+   position: relative;
+   top: 45%;
+   left: 0%;
+   }
   </style>
+<body>
+
+    <div class="clock">
+      <div class="clock-face">
+         <img src="wand.png" class="hand hour-hand" id="hLine" height="100px">
+         <img src="wand.png" class="hand min-hand" id="mLine" height="100px">
+         <img src="wand.png" class="hand second-hand" id="sLine" height="100px">
+         <img src="smile.png" id="smile" width="50px">
+      </div>
+    </div>
 
   <script>
+  window.onload = function() {
+      setInterval(function runClock() {
+         
+         const now = new Date();
+         
+         const secondHand = document.querySelector('.second-hand');
+         const minHand = document.querySelector('.min-hand');
+         const hourHand = document.querySelector('.hour-hand');
 
+         var seconds = now.getSeconds(); // seconds 1, 2, 3 , ... , 59, 60
+         var secondsDegrees = ((seconds / 60) * 360) + 90;
+         var mins = now.getMinutes();
+         var minsDegrees = ((mins / 60) * 360) + 90;
+         var hours = now.getHours();
+         var hoursDegrees = ((hours / 12) * 360) + 90;
+
+         secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+         minHand.style.transform = `rotate(${minsDegrees}deg)`;
+         hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      }, 1000);
+   };
   </script>
 </body>
 </html>
