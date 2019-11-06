@@ -6,8 +6,7 @@
 </head>
   <style>
     html {
-      background: url(https://wallpaperstream.com/wallpapers/full/summer/Pink-Clouds-Sky-Summer-Wallpaper.jpg);
-      background-size: contain;
+      background: url(bg.png) repeat;
       font-family: 'helvetica neue';
       text-align: center;
       font-size: 10px;
@@ -23,66 +22,87 @@
     }
 
     .clock {
-      width: 30rem;
-      height: 30rem;
-      border: 20px solid white;
-      border-radius: 50%;
-      margin: 50px auto;
-      position: relative;
-      padding: 2rem;
-      box-shadow: 10px #C759E3;
+	   width: 37rem;
+	   height: 43rem;
+	   margin: 50px auto;
+	   position: relative;
     }
+
+	.clock-frame {
+	   width: 30rem;
+	   height: 30rem;
+	   border: 15px solid #3598DF;
+	   border-radius: 50%;
+	   margin: 50px auto;
+	   position: relative;
+	   box-shadow: 3px 3px 1px #A8A4BE;
+	}
 
     .clock-face {
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+      background: white;
+ 	  border-radius: 50%;
+ 	  box-shadow: 3px 3px 1px #A8A4BE inset ;
     }
     
-    @keyframes rotate {
-	100% {
-		transform: rotateZ(360deg);
-  		 }
+	@keyframes rotate { /* set 'rotate' as a keyframes name*/
+	100% { /* set one among 'from', 'to' and percent value */
+	   transform: rotateZ(360deg); /* set value of a property named 'transform' */
+	   }
 	}
-
-    .hand {
-      width: 50%;
-      height: 4px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin : 0%; /* Set a rotated element's base placement (https://www.tabmode.com/homepage/transform-origin.html)*/
-    }
-    
-    #sLine {
-   animation: rotate 60s infinite linear;
+	
+	.hand {
+	   position: absolute;
+	   top: 50%;
+	   left: 50%;
+	   width: 40%; /* length of clock hands */
+	   height: 4px; /* width of clock hands */
+	   transform-origin: 0%;
+	   background: black;
+	   border-radius: 10px;
+	   box-shadow: 0 0px 1px
 	}
-
+	
+	#sLine {
+	   animation: rotate 60s infinite linear;
+	   width: 37%; /* length of clock hands */
+	   height: 1px; /* width of clock hands */
+	}
+	
 	#mLine {
-   animation: rotate 3600s infinite linear;
+	   animation: rotate 3600s infinite linear;
+	   width: 37%; /* length of clock hands */
+	   height: 5px; /* width of clock hands */
 	}
-
+	
 	#hLine {
-   animation: rotate 43200s infinite linear;
+	   animation: rotate 43200s infinite linear;
+	   width: 27%; /* length of clock hands */
+	   height: 5px; /* width of clock hands */
+	
 	}
-
-	#smile{
-   position: relative;
-   top: 45%;
-   left: 0%;
-   }
+	
+	#flower{
+	   position: relative;
+	   top: 43%;
+	   left: 0%;
+	   }
   </style>
 <body>
 
-    <div class="clock">
-      <div class="clock-face">
-         <img src="wand.png" class="hand hour-hand" id="hLine" height="100px">
-         <img src="wand.png" class="hand min-hand" id="mLine" height="100px">
-         <img src="wand.png" class="hand second-hand" id="sLine" height="100px">
-         <img src="smile.png" id="smile" width="50px">
+   <div class="clock">
+      <div class="clock-frame">
+         <div class="clock-face">
+            <div class="hand hour-hand" id="hLine"></div>
+            <div class="hand min-hand" id="mLine"></div>
+            <div class="hand second-hand" id="sLine"></div>
+            <img src="flower.png" id="flower" width="60px">
+         </div>   
       </div>
-    </div>
+   </div>
+
 
   <script>
   window.onload = function() {
@@ -95,11 +115,11 @@
          const hourHand = document.querySelector('.hour-hand');
 
          var seconds = now.getSeconds(); // seconds 1, 2, 3 , ... , 59, 60
-         var secondsDegrees = ((seconds / 60) * 360) + 90;
+         var secondsDegrees = ((seconds / 60) * 360) - 90;
          var mins = now.getMinutes();
-         var minsDegrees = ((mins / 60) * 360) + 90;
+         var minsDegrees = ((mins / 60) * 360) - 90;
          var hours = now.getHours();
-         var hoursDegrees = ((hours / 12) * 360) + 90;
+         var hoursDegrees = ((hours / 12) * 360) - 90;
 
          secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
          minHand.style.transform = `rotate(${minsDegrees}deg)`;
