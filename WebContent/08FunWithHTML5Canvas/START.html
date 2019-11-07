@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+
+const canvas = document.querySelector('#draw');
+
+/* The canvas context is an object with properties and methods that you can use to render graphics inside the canvas element.
+The context can be 2d or webgl (3d).
+Each canvas element can only have one context. */ 
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.width = window.innerHeight;
+
+ctx.strokeStyle="#959FB6";
+ctx.lineJoin ="round"; // corner
+ctx.lineCap ="square"; // end points of lines
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
