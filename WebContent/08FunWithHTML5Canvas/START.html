@@ -11,47 +11,60 @@
 </head>
 <body>
 	<canvas id="draw" width="800" height="800"></canvas>
-<script>
-
-	window.onload=function(){
-		
+<script>	
 		const canvas = document.querySelector('#draw');
 
 		/* The canvas context is an object with properties and methods that you can use to render graphics inside the canvas element.
 		The context can be 2d or webgl (3d).
 		Each canvas element can only have one context. */ 
 		const ctx = canvas.getContext('2d');
-		ctx.beginPath();
+		
+		// Drawing starts from (0, 0) of the canvas
+		let lastX = 0;
+		let lastY = 0;
+		
 		ctx.strokeStyle="orange"; // shape outline color
 		// fillStyle is for the fill color
 		ctx.lineJoin ="round"; // corner
 		ctx.lineCap ="square"; // end points of lines
 
-		//let isDrawing = true; // Draw when you move mouse
-	
+		let isDrawing = false; // Draw when you move mouse
+		
+		/* Use this code when you want to draw a line.
+		Don't forget beignPath() and closePath().
+		
+		ctx.beginPath();
 	    ctx.moveTo(75, 50);
 	    ctx.lineTo(100, 75);
 	    ctx.lineTo(100, 25);
 	    ctx.lineTo(75, 50);
 		ctx.stroke();
 		ctx.closePath();
+		*/
+
+		function draw(e){
+			if(!isDrawing){
+				return; // stop the function from running when they are not moused.
+			} else {
+				ctx.beginPath();
+				ctx.moveTo(lastX, lastY);
+				/* offsetX, offsetY shows location where the event actually happens. */
+				ctx.lineTo(e.offsetX, e.offsetY);
+				ctx.stroke();
+				lastX = e.offsetX;
+				lastY = e.offsetY;
+			}
+		}
 		
-	};
+		canvas.addEventListener('mousedown', (e) => {
+			isDrawing = true;
+			lastX = e.offsetX;
+			lastY = e.offsetY;
+		});
+		canvas.addEventListener('mousemove', draw);
+		canvas.addEventListener('mouseup', ()=> isDrawing = false);
+		canvas.addEventListener('mouseout', ()=> isDrawing = false);
 
-/*
-function draw(e){
-	if(!ctx){
-		return; // stop the function from running
-	} else {
-		return ctx;
-	}
-}
-
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mousedown', ()=> isDrawing = true);
-canvas.addEventListener('mouseup', ()=> isDrawing = false);
-canvas.addEventListener('mouseout', ()=> isDrawing = false);
-*/
 </script>
 
 </body>
