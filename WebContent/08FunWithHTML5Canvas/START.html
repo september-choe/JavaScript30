@@ -22,11 +22,13 @@
 		// Drawing starts from (0, 0) of the canvas
 		let lastX = 0;
 		let lastY = 0;
+		let hue = 0;
 		
 		ctx.strokeStyle="orange"; // shape outline color
 		// fillStyle is for the fill color
 		ctx.lineJoin ="round"; // corner
-		ctx.lineCap ="square"; // end points of lines
+		ctx.lineCap ="round"; // end points of lines
+		ctx.lineWidth = 50;
 
 		let isDrawing = false; // Draw when you move mouse
 		
@@ -46,6 +48,7 @@
 			if(!isDrawing){
 				return; // stop the function from running when they are not moused.
 			} else {
+				ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 				ctx.beginPath();
 				ctx.moveTo(lastX, lastY);
 				/* offsetX, offsetY shows location where the event actually happens. */
@@ -53,6 +56,7 @@
 				ctx.stroke();
 				lastX = e.offsetX;
 				lastY = e.offsetY;
+				hue++;
 			}
 		}
 		
