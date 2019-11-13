@@ -8,13 +8,12 @@
 /* root is a CSS pseudo-class selector used to select the element 
 that represents the root of the document.
 It can select what usual simple selectors can't. */
-	
+
 	:root {
 	 --base: #ffc600;
 	 --spacing: 10px;
 	 --blur: 10px;
 	}
-	
 	img{
 		padding: var(--spacing);
 		background: var(--base);
@@ -61,11 +60,15 @@ It can select what usual simple selectors can't. */
   <script>
   	const inputs = document.querySelectorAll('.controls input');
   	const img = document.querySelector('img');
-  	var border = 1;
   	
   	function handleUpdate(){
-  		border++;
-  		img.setAttribute('border', border);
+  	  	var spacingValue = document.getElementById('spacing').value;
+  	  	var blurValue = document.getElementById('blur').value;
+  	  	var baseValue = document.getElementById('base').value;
+  	  	
+  		img.style.setProperty('padding', spacingValue);
+  		img.style.setProperty('blur', blurValue);
+  		img.style.setProperty('background', baseValue);
   	}
   	
  	inputs.forEach(input => input.addEventListener('change', handleUpdate));
