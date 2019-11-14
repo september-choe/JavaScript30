@@ -5,15 +5,18 @@
   <title>사진 보정</title>
   <style>
 
-/* root is a CSS pseudo-class selector used to select the element 
+/* :root is a CSS pseudo-class selector used to select the element 
 that represents the root of the document.
-It can select what usual simple selectors can't. */
+It can select what usual simple selectors can't.
+:root represents the <html> element and is identical to the selector html.
+:root can be useful for declaring global CSS variables */
 
 	:root {
 	 --base: #ffc600;
 	 --spacing: 10px;
 	 --blur: 10px;
 	}
+	
 	img{
 		padding: var(--spacing);
 		background: var(--base);
@@ -61,25 +64,35 @@ It can select what usual simple selectors can't. */
   	const inputs = document.querySelectorAll('.controls input');
   	const img = document.querySelector('img');
   	
-  	function handleUpdate(){
-  	  	var spacingValue = document.getElementById('spacing').value;
-  	  	var blurValue = document.getElementById('blur').value;
+  	
+  	/* Method 1.
+  	function handleUpdate1(){
+  	  	var spacingValue = document.getElementById('spacing').value + "px";
+  	  	var blurValue = "blur(" + document.getElementById('blur').value + "px)";
   	  	var baseValue = document.getElementById('base').value;
   	  	
   		img.style.setProperty('padding', spacingValue);
-  		img.style.setProperty('blur', blurValue);
+  		img.style.setProperty('filter', blurValue);
   		img.style.setProperty('background', baseValue);
   	}
+  	*/
   	
- 	inputs.forEach(input => input.addEventListener('change', handleUpdate));
- 	inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+  	// Method 2.
+  	function handleUpdate2(){
+  		const suffix = this.dataset.sizing || '';
+  		console.log("suffix: " + suffix);
+  		console.log("this.name: " + this.name);
+  		console.log("${this.name}: " + `${this.name}`);
+  		// documentElement returns the Element that is the root element of the document
+  		document.documentElement.style.setProperty("--"+this.name, this.value + suffix);
+  	}
+  	
+ 	inputs.forEach(input => input.addEventListener('change', handleUpdate2));
+ 	inputs.forEach(input => input.addEventListener('mousemove', handleUpdate2));
  	/* target.addEventListener(type, listener);
  	- type: String representing the event type to listen for.
  	- listener: The object which receives a notification when an event of the specified type occurs.
  	*/
- 	
- 	
- 	
   </script>
 
 </body>
