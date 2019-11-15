@@ -23,8 +23,15 @@ function debounce(func, wait = 20, immediate = true) {
 const sliderImages = document.querySelectorAll('img');
 
 function checkSlide(e) {
-	console.log(e);
-	}
+	sliderImages.forEach(sliderImage => {
+		// window.scrollY returns the number of pixels that the document is currently scrolled vertically
+		// window.innerHeight means height of the browser window viewport excluding browser frame (https://sometimes-n.tistory.com/22)
+		const slideInAt = (window.scrollY + window.innerHeight) - slideImage.height/2;
+		const imageBottom = sliderImage.offsetTop + sliderImage.height;
+		const isHalfShown = slideInAt > sliderImage.offsetTop;
+		const isNotScrolledPast = window.scrollY < imageBotton;
+	})
+}
 
 window.addEventListener('scroll', debounce(checkSlide));
 
