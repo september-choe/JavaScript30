@@ -24,19 +24,17 @@ const sliderImages = document.querySelectorAll('img');
 
 function checkSlide(e) {
 	sliderImages.forEach(sliderImage => {
-		console.log('check1');
 		// window.scrollY returns the number of pixels that the document is currently scrolled vertically
 		// window.innerHeight means height of the browser window viewport excluding browser frame (https://sometimes-n.tistory.com/22)
-		const slideInAt = window.scrollY - sliderImage.height/2;
-		const imageBottom = sliderImage.offsetTop + sliderImage.height;
+		const slideInAt = window.scrollY + window.innerHeight;
+		const imageBottom = (sliderImage.offsetTop + sliderImage.height) - (sliderImage.height/2);
 		// The offsetTop property returns the top position (in pixels) relative to the top of the offsetParent element.
-		//const isHalfShown = slideInAt > sliderImage.offsetTop;
-		//const isNotScrolledPast = window.scrollY < imageBotton;
-		if (scrollY < slideInAt + 50){
-			console.log('check2');
-			sliderImage.style.setProperty('opacity', 100);
-			sliderImage.style.setProperty('transform', 'translateX(0%)');
-			
+		const isHalfShown = slideInAt > sliderImage.offsetTop;
+		const isNotScrolledPast = window.scrollY < imageBottom;
+		if (isHalfShown && isNotScrolledPast){
+			sliderImage.classList.add('active');
+		} else {
+			sliderImage.classList.remove('active');
 		}
 		
 	})
