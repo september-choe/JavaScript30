@@ -31,29 +31,87 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+/*    inventors.filter(inventor => {
+    	if (inventor.year >= 1500 && inventor.year <1600){
+    		console.log(inventor.first);
+    	}
+    });
+    
+    var born1500s = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year <1600));
+    console.log(born1500s);
+*/
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-
+/*
+    var names = inventors.map(inventor => (inventor.first + inventor.last));
+    console.log(names);
+*/
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+/*    
+    var ans3 = inventors.sort(function(a, b){
+    	if (a.year > b.year){
+    		return 1;
+    	} else if (a.year < b.year){
+    		return -1;
+    	} else{
+    		return 0;
+    	}
+    });
+    
+    console.table(ans3);
+*/
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-
+/*    		
+    var ans4 = inventors.reduce((acc, cur){
+    	return acc + (cur.passed - cur.year);
+    }, 0);
+    console.log(ans4);
+*/    
     // 5. Sort the inventors by years lived
-
+/*    
+    var ans5 = inventors.sort((a,b) => {
+    	if ((a.passed - a.year) > (b.passed - b.year)){
+    		return 1;
+    	} else if ((a.passed - a.year) < (b.passed - b.year)){
+    		return -1;
+    	} else {
+    		return 0;
+    	}
+    })
+    
+    console.log(ans5);
+*/
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+/*    
+    var ans7 = people.sort((a,b)=>{
+    	return a.split(', ')[1] < b.split(', ')[1] ? 1 : -1;
+    })
+    
+    console.table(ans7);
+*/
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+/*
+	const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    var ans8= {};
+    
+	data.map(dataEach => {
+		if (ans8.hasOwnProperty(dataEach)){
+			ans8[dataEach] += 1;
+		} else {
+			ans8[dataEach] = 1;
+		}
+	})
+	
+	console.log(ans8);
+*/
   </script>
 </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script>
+
+	// how to build hashMap in javascript 
+
+	let JqMap = function(){
+		this.map = new Object();
+	}
+	
+	JqMap.prototype = {
+			put: function(key, value){
+				this.map[key] = value;
+			},
+			
+			get: function(key){
+				return this.map[key];
+			},
+			
+			containsKey: function(key){
+				return key in this.map;
+			},
+			
+			containsValue: function(value){
+				for (let prop in this.map){
+					if(this.map[prop] == value){
+						return true;
+					}
+				}
+				return false;
+			},
+			
+			clear: function(){
+				for (let prop in this.map){
+					delete this.map[prop];
+				}
+			},
+			
+			remove: function(key){
+				delete this.map[key];
+			},
+			
+			keys: function(){
+				let arKey = new Array();
+				for (let prop in this.map){
+					arKey.push(prop);
+				}
+				return arKey;
+			},
+			
+			values: function(){
+				let arVal = new Array();
+				for (let prop in this.map){
+					arVal.push(this.map[prop]);
+				}
+				return arVal;
+			},
+			
+			size: function(){
+				let count = 0;
+				for (let prop in this.map){
+					count++;
+				}
+				return count;
+			}
+	}
+
+</script>
+
+</body>
+</html>

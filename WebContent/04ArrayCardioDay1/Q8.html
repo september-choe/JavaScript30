@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<script>
+	
+    // 8. Reduce Exercise
+    // Sum up the instances of each of these
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
+
+    // Solution 1. map
+    /*
+    let ans1= {};
+    
+	data.map(dataEach => {
+		if (ans1.hasOwnProperty(dataEach)){
+			ans1[dataEach] += 1;
+		} else {
+			ans1[dataEach] = 1;
+		}
+	})
+	
+	console.log(ans1);
+	*/
+	// Solution 2. reduce(reduce(total, amount, index, array)=>{}, initial value of total);
+	// ref. https://www.freecodecamp.org/news/reduce-f47a7da511a9/
+	/*
+	let ans2 = data.reduce((obj, item) => {
+      if (obj[item]) {
+    	  obj[item] += 1;
+    	  return obj;
+      } else {
+    	  obj[item] = 1;
+    	  return obj;
+      }
+    }, {});
+
+    console.log(ans2);
+    */
+    
+    //Solution 3. reduce with or operator ||
+    /*
+    data.reduce((acc, item) => {
+		acc[item] = (acc[item] || 0) + 1;
+		console.log(acc[item]);
+		return acc;
+	}, {})
+	*/
+	</script>
+</body>
+</html>
